@@ -13,6 +13,28 @@ public class App {
         //Coloque los llamados a cada función de acuerdo con cada enunciado
         //codifique el control de errores para el main
 
+        try {
+            
+            System.out.println(num_impares(245));
+
+            System.out.println(fibo(10));
+
+            int num = (int)((Math.random()*(30-20)+20));
+            for(int n=0; n<=num; n++){
+                System.out.println(Calcular_raiz());
+            }
+            
+            System.out.println(nros_pares(5, 10));
+
+            System.out.println(Cant_num_alea(5));
+
+            System.out.println(Sorteo_loteria());
+        
+        } 
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
 
     }
 
@@ -26,6 +48,31 @@ public class App {
      * 
     */
 
+    public static String num_impares (int num){    
+        try {
+            String cadenaImpares="";
+            int contImpares=0;
+            if(num>=100 && num<=500) {
+                
+                for(int impares=1; impares<=num; impares+=2){
+                   cadenaImpares = cadenaImpares+ " " + impares + ",  ";
+                   contImpares++;
+                   if (contImpares==8){
+                    cadenaImpares = cadenaImpares+"\n";
+                    contImpares=0;
+                   }
+                    
+                }
+              return cadenaImpares;  
+            }          
+            else
+                return "El numero debe estar entre 100 y 500";
+        } 
+        catch (Exception e) {          
+            return "Error";
+        }
+    }
+
     /* 2. 	Escriba una función que reciba un entero N mayor de 2  y retorne un string cono esos N términos de la 
     serie de Fibonacci (La sucesión de Fibonacci se trata de una serie infinita de números naturales que empieza con un 0 y un 1 
     y continúa añadiendo números que son la suma de los dos anteriores: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 
@@ -33,6 +80,31 @@ public class App {
      * 
      * 
     */
+
+    public static String fibo (int num){
+        try {
+            String fibonacci = "0, 1";
+            int fibo;
+            int fibo1=0;
+            int fibo2=1;
+            
+            if(num>2){
+                for(int n_fibo=0; n_fibo<=num; n_fibo++){
+                    fibo = fibo1+fibo2;
+                    fibonacci = fibonacci + ", " +fibo;
+                    fibo1 = fibo2;
+                    fibo2= fibo;
+
+                }        
+                return fibonacci;
+            }
+            else
+                return "El número debe ser mayor a 2";
+        } 
+        catch (Exception e) {
+            return "Error";
+        }
+    }
 
     /* 
      * 3.	Diseñar y desarrollar una función que NO reciba datos de entrada, genere aleatoriamente un número entre 2 y 355, 
@@ -42,6 +114,17 @@ public class App {
        de veces que va a llamar a la función y en un ciclo, mostrar los resultados.
 
     */
+
+    public static double Calcular_raiz(){
+        try {
+            double num = (int)((Math.random()*(355-2)+2));
+            double raiz = (Math.sqrt(num));
+            return raiz;
+        } 
+        catch (Exception e) {
+            return -1;
+        }
+    }
 
 
 
@@ -53,6 +136,28 @@ public class App {
         Llame la función desde el main e imprimir el resultado arrojado.
     */
 
+    public static String nros_pares (int val_inicial, int val_final){
+        try {
+            final int total_num = 900;
+            int num;
+            int cont_pares = 0;
+            if(val_inicial < val_final){
+                for(int n=0; n<=total_num; n++){
+                    num = (int)((Math.random()*(val_final-val_inicial)+val_inicial));
+                    if(num%2 == 0)
+                        cont_pares++;
+                }
+                return "Total pares " + cont_pares;
+            }
+            else
+                return "El número inicial debe ser menor que el número final";
+        } 
+        catch (Exception e) {
+            return "Error";
+        }
+    }
+
+
 
 
 
@@ -63,6 +168,21 @@ public class App {
 
       
     */
+
+    public static int Cant_num_alea (int n){
+        try {
+            int num;
+            int suma = 0;
+            for(int i=0; i<n; i++){
+                num = (int)(Math.random()*100);
+                suma = suma + num;
+            }
+            return suma;
+        } 
+        catch (Exception e) {
+            return -1;
+        }
+    }
 
 
     /* 6.	Se requiere una función para simular el sorteo de una lotería, de acuerdo con las siguientes condiciones:
@@ -104,5 +224,47 @@ public class App {
      * 
      * 
     */
+
+    public static String Sorteo_loteria(){
+        try {
+            String n = "";
+            int sorteo;
+            int num;
+            int serie;
+            String premio="";
+
+            for(int i = 1; i <=20; i++){
+                sorteo = (int)((Math.random()*(20-0)+0));
+                num = (int)((Math.random()*(9999-0)+0));
+                serie = (int)((Math.random()*(150-100)+100));
+                if(num>=0 && num<=9)
+                    n = "000" + num;
+                else if(num>9 && num<100)
+                    n = "00" + num;
+                else if(num>99 && num<1000)
+                    n = "0" + num;
+                else
+                    n += num;
+                    
+                if (i==1){
+                    premio = premio + " ======Premio mayor========== \n Sorteo #" + sorteo + " - " + "Número premiado " + n + " - " + "Serie " + serie + "\n";
+                }
+                else if (i>=2 && i<=5)
+                {
+                    premio = premio + " ======Premio seco========== \n Sorteo #" + sorteo + " - " + "Número premiado " + n + " - " + "Serie " + serie + "\n" ;
+                }
+                else if (i>5 && i<=20){
+                    premio = premio + " ======Premio menor========== \n Sorteo #" + sorteo + " - " + "Número premiado " + n + " - " + "Serie " + serie + "\n";
+                }
+
+                n="";
+            }
+            
+            return premio;
+        } 
+        catch (Exception e) {
+            return "Error";
+        }
+    }
 
 }
